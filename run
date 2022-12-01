@@ -1,0 +1,14 @@
+#!/bin/bash
+
+./cc < $1 > program.j
+
+if [[ $? == 0 ]]
+then
+    java -jar jasmin.jar program.j > /dev/null
+    java Program
+    rm program.j
+    rm Program.class
+else
+    cat program.j
+    rm program.j
+fi

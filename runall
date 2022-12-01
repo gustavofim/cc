@@ -1,0 +1,10 @@
+#!/bin/bash
+EXE=./run
+IN=in
+
+for infile in `ls $IN/c*.c`; do
+    base=$(basename $infile)
+    echo $infile
+    $EXE $infile
+    echo 
+done

@@ -1,0 +1,28 @@
+#!/bin/bash
+EXE=./cc
+IN=in
+TREE_OUT=trees
+CODE_OUT=out
+
+[ ! -z "$CC_DOT" ] && [ $CC_DOT == 1 ] && [ ! -d $TREE_OUT ] && mkdir $TREE_OUT || mkdir $CODE_OUT
+
+for infile in `ls $IN/*.c`; do
+    base=$(basename $infile)
+    echo $infile
+
+    if [[ $CC_DOT != 1 ]]
+    then
+        $EXE < $infile > $CODE_OUT/${base/.c/.j}
+        if [[ $? == 0 ]]
+        then
+            echo "DONE"
+        else
+            cat $CODE_OUT/${base/.c/.j}
+            rm $CODE_OUT/${base/.c/.j}
+        fi
+    else
+        $EXE < $infile 2> temp.dot
+        dot -Tpdf temp.dot -o $TREE_OUT/${base/.c/.pdf}
+        rm temp.dot
+    fi
+done
