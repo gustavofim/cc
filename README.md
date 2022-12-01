@@ -1,4 +1,4 @@
-# Trab_CC_2022_1
+# Compilador C Simplificado
 
 ## CP1 - Analizadores léxico e sintático
 
